@@ -7,21 +7,26 @@ const apiKey = 'AIzaSyC5CswQ7gz5vOrOPfGnlCCrN44xJ3zU384';
 const App = () => {
   const [selectedPlace, setSelectedPlace] = React.useState(null);
   const [info, setInfo] = React.useState('');
+  const [mapCenter, setMapCenter] = useState({ lat: -26.031921, lng: 28.185995 });
 
   const onPlaceSelected = (place) => {
-    const location = place.geometry.location;
-    setSelectedPlace({ lat: location.lat(), lng: location.lng() });
-    setInfo(getFunDetails(place)); // Replace with more fun details if needed
+    if (place.geometry) {
+      const location = place.geometry.location;
+      const newCenter = { lat: location.lat(), lng: location.lng() };
+      setSelectedPlace(newCenter);
+      setMapCenter(newCenter);
+      setInfo(getFunDetails(place));
+    }
   };
 
   const onMapClick = (event) => {
     const location = { lat: event.latLng.lat(), lng: event.latLng.lng() };
     setSelectedPlace(location);
-    setInfo(getFunDetails({ geometry: { location } })); // Get fun details
+    setMapCenter(location);
+    setInfo(getFunDetails({ geometry: { location } }));
   };
 
   const getFunDetails = (place) => {
-    // Replace this with actual API call or fun details logic
     return `Fun details about ${place.formatted_address || 'the selected location'}`;
   };
 
@@ -32,8 +37,8 @@ const App = () => {
       <GoogleMap
           onClick={onMapClick}
           mapContainerStyle={{ height: '700px', width: '100%' }}
-          zoom={13}
-          center={{ lat: -26.031921, lng: 28.185995 }}
+          zoom={10}
+          center={mapCenter} 
         >
           {selectedPlace && <Marker position={selectedPlace} />}
           {selectedPlace && (
