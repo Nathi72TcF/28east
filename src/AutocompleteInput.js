@@ -20,7 +20,7 @@ const AutocompleteInput = ({ onPlaceSelected }) => {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
       <Autocomplete
-        apiKey="AIzaSyC5CswQ7gz5vOrOPfGnlCCrN44xJ3zU384"
+        apiKey="Google API Key"
         ref={autocompleteRef}
         onPlaceSelected={onPlaceSelected}
         types={['address']}
