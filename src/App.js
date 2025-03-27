@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { GoogleMap, LoadScript, Marker, InfoWindow } from '@react-google-maps/api';
 import AutocompleteInput from './AutocompleteInput';
 
-const apiKey = 'AIzaSyC5CswQ7gz5vOrOPfGnlCCrN44xJ3zU384'; 
+const apiKey = 'Google API Key'; 
 
 const App = () => {
   const [selectedPlace, setSelectedPlace] = React.useState(null);
